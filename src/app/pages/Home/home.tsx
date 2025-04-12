@@ -1,35 +1,41 @@
 import { useContext, useEffect, useState } from "react";
 import { motion } from 'framer-motion';
-import DevImg  from './../../images/Programmer.svg'
+import DevImg from './../../images/Programmer.svg'
 import TypingAnimation from "./typingAnimation";
 import themeContext from '../../components/Themes/themeContext';
 import { MdOutlineDownload } from "react-icons/md";
 
-
-
-function Home () {
+function Home() {
     const theme = useContext(themeContext);
-     
+    const [isMobile, setIsMobile] = useState(false);
 
-     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-       useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY,
-      });
-    };
+    useEffect(() => {
+        const handleMouseMove = (e: MouseEvent) => {
+            setMousePosition({
+                x: e.clientX,
+                y: e.clientY,
+            });
+        };
 
-    window.addEventListener("mousemove", handleMouseMove);
+        const handleResize = () => {
+            setIsMobile(window.innerWidth <= 768); // Check for mobile screen size
+        };
 
-    // Cleanup the event listener when the component is unmounted
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
+        window.addEventListener("mousemove", handleMouseMove);
+        window.addEventListener("resize", handleResize);
 
-    return(
+        handleResize(); // Initial check
+
+        // Cleanup event listeners on unmount
+        return () => {
+            window.removeEventListener("mousemove", handleMouseMove);
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+
+    return (
         <>
             <div className="relative h-full flex md:items-center md:justify-center flex-col md:flex-row overflow-hidden">
                 <div className="flex-1 h-full pl-5 md:pl-5 lg:pl-20  order-2 md:order-1 z-10">
@@ -54,15 +60,15 @@ function Home () {
                     </div>
                 </div>
                 <div className="flex-1 flex justify-center items-center order-1 md:order-2 z-10">
-                <motion.img
+                    <motion.img
                         src={DevImg}
                         alt="Programmer"
                         className="object-cover w-full h-full"
                         initial={{ x: '100%' }}
                         animate={{
-                            x: [200,-100,0],
+                            x: [200, -100, 0],
                             y: 0, 
-                          }}
+                        }}
                         transition={{ duration: 1, ease: "easeOut" }}
                         drag
                         dragConstraints={{ left: -100, right: 100, top: -100, bottom: 100 }}
@@ -72,11 +78,14 @@ function Home () {
                     />
                 </div>
 
-                <div className="z-1 pointer-events-none">
+                <div className="z-1 pointer-events-none ">
                     <motion.div 
-                    className={`absolute bottom-[-60px] left-[-10px] text-[200px] font-bold whitespace-nowrap text-movingText z-1 theme-${theme}`}                    
-                    variants={sliderVariants}  initial="initial" animate="animate">
-                       <span className="opacity-20">FullStack Developer</span> 
+                        className={`absolute bottom-0 left-[200px] md:bottom-[-60px] md:left-[-10px] text-[150px] md:text-[200px] font-bold whitespace-nowrap text-movingText z-10 theme-${theme}`}                    
+                        variants={sliderVariants}  
+                        initial="initial" 
+                        animate={isMobile ? "mobile" : "animate"} // Switch based on screen size
+                    >
+                        <div className="opacity-20 rotate-90 md:rotate-0">FullStack Developer</div> 
                     </motion.div>
                 </div>
 
@@ -85,16 +94,16 @@ function Home () {
                     <motion.div
                         className="absolute rounded-full bg-blue-700"
                         style={{
-                        left: mousePosition.x - 80,
-                        top: mousePosition.y - 20,
+                            left: mousePosition.x - 80,
+                            top: mousePosition.y - 20,
                         }}
                         animate={{
-                        scale: 1.5,  // Grow the cursor slightly when moving
+                            scale: 1.5,  // Grow the cursor slightly when moving
                         }}
                         transition={{
-                        type: "spring",
-                        stiffness: 400,
-                        damping: 20,
+                            type: "spring",
+                            stiffness: 400,
+                            damping: 20,
                         }}
                         initial={{ opacity: 0.7 }}
                     >
@@ -105,83 +114,50 @@ function Home () {
                     <motion.div
                         className="absolute rounded-full bg-blue-300 opacity-5"
                         style={{
-                        left: mousePosition.x - 50, // Trailing circle position (offset)
-                        top: mousePosition.y - 50,  // Trailing circle position (offset)
+                            left: mousePosition.x - 50,
+                            top: mousePosition.y - 50,
                         }}
                         animate={{
-                        scale: 2,  // Larger trailing circle
-                        opacity: 0,  // Fade out over time
+                            scale: 2,
+                            opacity: 0,
                         }}
                         transition={{
-                        type: "spring",
-                        stiffness: 300,
-                        damping: 15,
-                        duration: 1,  // Duration of fade-out
+                            type: "spring",
+                            stiffness: 300,
+                            damping: 15,
+                            duration: 1, 
                         }}
                     >
                         <div className="w-20 h-20 bg-blue-300 rounded-full opacity"></div>
                     </motion.div>
-                    </div>
-
+                </div>
             </div>
-
-
         </>
     );
 }
 
-  const bubbleVariants = {
-    initial: {
-      y: "100%",          // Start at the bottom
-      scale: 0.3,         // Start small
-      opacity: 1,         // Fully visible at the start
-    },
-    animate: {
-      y: "-100%",        // Move upward to the top
-      scale: 3,           // Grow larger
-      opacity: 0,         // Fade out when reaching the top
-      transition: {
-        type: "spring",   // Use a spring-based animation for more natural movement
-        stiffness: 100,   // Control the bounciness of the spring
-        damping: 20,      // Control the "settling" effect of the spring
-        duration: 5,      // Animation duration
-      },
-    },
-  };
-
-const sliderVariants2 = {
-  initial: {
-    x: '-100%',  // Start off to the left of the screen
-    y: '200%',   // Start off below the screen (bottom)
-    opacity: 1,  // Start invisible
-    rotate: -90,
-  },
-  animate: {
-    x: '100%',   // Move to the right (off-screen right)
-    y: '-100%',  // Move to the top (off-screen top)
-    opacity: 1,  // Fade in
-    transition: {
-        repeat: Infinity,
-        repeatType: "mirror",
-      duration: 5,   // Duration of the animation
-      ease: "easeOut",  // Easing function for smooth animation
-    },
-  },
-};
-
 const sliderVariants = {
     initial: {
-      x: "-50%",
+        x: "-50%", // Horizontal position for large screens
     },
     animate: {
-      x: "30%",
-      opacity: 1,
-      transition: {
-        repeat: Infinity,
-        repeatType: "mirror",
-        duration: 8,
-      },
+        x: "30%", // Horizontal position for large screens
+        opacity: 1,
+        transition: {
+            repeat: Infinity,
+            repeatType: "mirror",
+            duration: 8,
+        },
     },
-  };
+    mobile: {
+        y: ["30%","-200%"], // Vertical position for mobile screens
+        opacity: 1,
+        transition: {
+            repeat: Infinity,
+            repeatType: "mirror",
+            duration: 5,
+        },
+    },
+};
 
 export default Home;

@@ -18,15 +18,29 @@ const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
 const [theme, setTheme] = useState<string>(themes[0]);
 let [activeTab, setActiveTab] = useState(tabs[0].id);
 
+const [isScaled, setIsScaled] = useState(false);
+const [switchTheme, setSwitchTheme] = useState<string>(themes[0]);
+
 useEffect(() => {
   const localtheme = localStorage.getItem("theme") ?? "dark";
   setTheme(localtheme);
 },[])
 
 const selectThemes = (theme: string) => {
- setTheme(theme);
- localStorage.setItem("theme", theme);
-}
+  setIsScaled(!isScaled);        // Start scale animation
+  setSwitchTheme(theme);         // Switch theme (maybe for styling/preview)
+
+  // Delay applying theme logic
+  setTimeout(() => {
+    setTheme(theme);             // Actual theme application after 3 seconds
+    localStorage.setItem("theme", theme);
+  }, 500); // 3 seconds
+
+  // Delay unscaling after 4 seconds
+  setTimeout(() => {
+    setIsScaled(false);
+  }, 800); // 4 seconds
+};
 
 
   const borderClass = (label: string) => {
@@ -47,6 +61,17 @@ const selectThemes = (theme: string) => {
   return (
     <>
     <div className="flex overflow-hidden">
+
+      {isScaled ? (
+        <motion.div
+          className={`absolute top-0 left-1/2 h-10 w-10 bg-bgPrimary rounded-full z-10 theme-${switchTheme}`}
+          animate={{ scale: 80 }}
+          transition={{ type: "tween", duration: 1, ease: "easeInOut" }}
+          style={{ translateX: "-50%", translateY: "-50%" }}
+        />
+      ) : null}
+
+
           <div className="absolute flex space-x-5 top-5 md:top-10 right-10 text-white z-50">
              <div className="flex space-x-1">
                 {tabs.map((tab) => (
@@ -72,37 +97,10 @@ const selectThemes = (theme: string) => {
 
           </div>
 
-            {/* <div className={`bg-primary text-tBase theme-${theme}`}><Header/></div>
-            <div className={`absolute bg-bgPrimary w-full z-10 relative overflow-y-auto theme-${theme}`}>
-              <themeContext.Provider value={theme}>
-                {children}
-              </themeContext.Provider>
-            </div> */}
 
 
-            {/* <div className={`bg-primary text-tBase theme-${theme}`}><Header/> </div>
-              <div className="flex-grow items-center justify-center">
-                <div className={`absolute bg-bgPrimary w-screen h-screen z-10 min-h-full overflow-y-auto theme-${theme}`}>
-                  <themeContext.Provider value={theme}>
-                    {children}
-                  </themeContext.Provider>
-                </div>
-            </div> */}
-
-
-            {/* <div className="flex overflow-hidden">
-              <div className={`bg-primary text-tBase theme-${theme}`}><Header/> </div>
-              <div className="flex-grow items-center justify-center overflow-hidden">
-                <div className={`absolute bg-bgPrimary w-full minh-full z-10 h-full overflow-y-auto overflow-x-hidden theme-${theme}`}>
-                <themeContext.Provider value={theme}>
-                  {children}
-                </themeContext.Provider>
-                </div>
-              </div>
-            </div> */}
-
-            <div className={`h-screen bg-primary text-tBase theme-${theme}`}><Header/></div>
-            <div className={`h-screen w-[100%] bg-bgPrimary overflow-y-auto px-5 theme-${theme}`}>
+            <div className={`h-screen bg-primary text-tBase theme-${theme} z-50`}><Header/></div>
+            <div className={`relative h-screen w-[100%] overflow-y-auto bg-bgPrimary overflow-x-hidden md:px-5 theme-${theme}`}>
                 <themeContext.Provider value={theme}>
                   {children}
                 </themeContext.Provider>

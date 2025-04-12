@@ -122,15 +122,15 @@ const Contact: React.FC = () => {
             </motion.div>
         </motion.div>
 
-        <motion.div className="formContainer w-[90%] md:w-auto mt-10 md:mt-0 md:mx-10">
+        <motion.div className="formContainer w-[90%] md:w-auto mt-10 md:mt-0 md:mx-10 md:flex md:items-center md:justify-center">
             
-            <motion.div className="emailSvg absolute pointer-events-none z-0"
+          <motion.div className="emailSvg absolute pointer-events-none z-0 flex items-center justify-center"
             initial={{ opacity: 1 }}
             whileInView={{ opacity: 0 }}
-            transition={{ duration: 2 }}
+            transition={{delay: 1, duration: 3 }}
             
             >
-            <svg width="450px" height="450px" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="300px" height="300px" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <motion.path
                 strokeWidth={0.2}
                 fill="none"
@@ -180,7 +180,7 @@ const Contact: React.FC = () => {
             onSubmit={sendEmail}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ delay: 2, duration: 1 }}
+            transition={{ delay: 3, duration: 2 }}
             >
                 <label htmlFor="name" className="block text-lg font-medium">
                 Name
@@ -229,7 +229,7 @@ const Contact: React.FC = () => {
 
                         <div className="absolute top-0 left-2  z-1 h-full w-full pointer-events-none overflow-hidden">
                             <motion.div 
-                            className={`absolute top-0 left-[-300px] text-[250px] h-[90%] font-bold whitespace-nowrap text-movingText  z-1 theme-${theme}`}                    
+                            className={`absolute top-0 left-[-200px] text-[250px] h-[90%] font-bold whitespace-nowrap text-movingText  z-1 theme-${theme}`}                    
                                 variants={sliderVariants}  initial="initial" animate="animate">
                                     <span className="opacity-10">CONTACT</span> 
                             </motion.div>
