@@ -5,6 +5,8 @@ import profilePNG from '../../images/profile.png'
 import themeContext from '../../components/Themes/themeContext';
 import jobExp from '../../data/jobExpData';
 
+import SERDAL from '../../data/logo.png'
+import UPLB from '../../data/UPLB_VIGHRColor_1.png'
 
 interface CompanyClient {
     name: string;
@@ -26,28 +28,12 @@ interface JobExperience {
 
 function About () {
     const theme = useContext(themeContext);
-      const [JExp, setJExp] = useState<JobExperience[]>([]);
+    const [JExp, setJExp] = useState<JobExperience[]>([]);
       const [isHovered, setIsHovered] = useState(false);
+      
       useEffect(() =>{
         setJExp(jobExp);
     },[])
-
-     const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-
-       useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY,
-      });
-    };
-
-    window.addEventListener("mousemove", handleMouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouseMove);
-    };
-  }, []);
 
     return(
         <>
@@ -103,59 +89,72 @@ function About () {
               <motion.div className="text-center text-2xl rounded-lg bg-primary text-white font-medium mt-20">
                   Clients
               </motion.div>
-              {
-                <motion.div className="flex flex-col md:flex-row py-10 items-center justify-center space-y-5 md:space-x-10 w-full">
-                  
+              
+                <motion.div className="flex flex-col md:flex-row items-center justify-center py-10 space-y-5 md:space-y-0 md:space-x-10">
+                
+
                   <motion.div className="shadow-lg">
+                  <motion.img 
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{
+                        duration: 0.5,
+                        ease: "easeInOut"
+                      }}
+                      whileHover={{
+                        scale: 1.1,
+                        transition: { 
+                          type: 'spring',
+                          stiffness: 600,
+                          damping: 10
+                        }
+                      }}             
+                    src={UPLB} alt="UPLB"  className="rounded-sm h-20 bg-white px-2"/>
+                  </motion.div>
+
+                  <motion.div className="shadow-lg">
+                  <motion.img 
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      transition={{
+                        duration: 0.5,
+                        ease: "easeInOut"
+                      }}
+                      whileHover={{
+                        scale: 1.1,
+                        transition: { 
+                          type: 'spring',
+                          stiffness: 600,
+                          damping: 10
+                        }
+                      }}             
+                    src={SERDAL} alt="SERDAL" className="rounded-lg h-20"/>
+                  </motion.div>  
+
+                {
+                  JExp.filter((_, index) => [0,1,2].includes(index)).map((exp) => (
+                  <motion.div key={`k${exp.id}`} id={`id${exp.id}`} className="shadow-lg">
                       <motion.img 
-                      initial={{ scale: 0, rotate: 0 }}
-                      animate={{scale: [0,1.2,1], transition:{ duration: .5} }}
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{
+                            duration: 0.5,
+                            ease: "easeInOut"
+                          }}
                           whileHover={{
-                              scale: 1.2,
-                              transition: { 
+                            scale: 1.1,
+                            transition: { 
                               type: 'spring',
-                              stiffness: 400,
-                              damping: 10 
-                              }
-                          }}               
-                      src={jobExp[0].client[0].logo} alt={jobExp[0].client[0].alt} className="rounded-lg h-20"/>
-                  </motion.div>
-
-                  <motion.div className="shadow-lg">
-                  <motion.img
-                      initial={{ scale: 0, rotate: 0 }}
-                      animate={{scale: [0,1.2,1], transition:{duration: .5} }}
-                      whileHover={{
-                          scale: 1.2,
-                          transition: { 
-                          type: 'spring',
-                          stiffness: 400,
-                          damping: 10 
-                          }
-                      }} 
-                      src={jobExp[1].client[0].logo} alt={jobExp[1].client[0].alt} className="rounded-lg h-20"/>
-                  </motion.div>
-
-                  <motion.div className="shadow-lg">
-                      <motion.img 
-                      initial={{ scale: 0, rotate: 0 }}
-                      animate={{scale: [0,1.2,1], transition:{duration: .5} }}
-                      whileHover={{
-                          scale: 1.2,
-                          transition: { 
-                          type: 'spring',
-                          stiffness: 400,
-                          damping: 10 
-                          }
-                      }}                 
-                      src={jobExp[2].client[0].logo} alt={jobExp[2].client[0].alt} className="rounded-lg h-20"/>
-                  </motion.div>
-
-                      
-                  
-
+                              stiffness: 600,
+                              damping: 10
+                            }
+                          }}             
+                        src={exp?.client[0].logo} alt={exp?.client[0].alt} className="rounded-lg h-20"/>
+                  </motion.div>                  
+                  ))
+                }
                 </motion.div>
-              }
+              
             </div>
 
             <div className="absolute top-0 left-2  z-1 h-full w-full pointer-events-none overflow-hidden">

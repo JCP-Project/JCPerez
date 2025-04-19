@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from "react";
 import { motion } from 'framer-motion';
 import themeContext from '../../components/Themes/themeContext';
+
 interface TypingAnimationProps {
-  messages: string[]; // Define the prop `messages` as an array of strings
+  messages: string[];
 }
 
 const TypingAnimation: React.FC<TypingAnimationProps> = ({ messages }) => {
@@ -15,7 +16,6 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({ messages }) => {
 
   useEffect(() => {
     const message = messages[currentIndex];
-    //let index = 0;
     let interval: ReturnType<typeof setInterval>;
 
     const type = () => {

@@ -28,9 +28,7 @@ const Contact: React.FC = () => {
   const formref = useRef<HTMLFormElement>(null);
   const ref = useRef<HTMLDivElement>(null);
   const isInview = useInView(ref, { margin: "100px" });
-  const [error, setError] = useState<string | undefined>();
 
-  // State management for form inputs
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -227,13 +225,13 @@ const Contact: React.FC = () => {
         </motion.div>
 
 
-                        <div className="absolute top-0 left-2  z-1 h-full w-full pointer-events-none overflow-hidden">
-                            <motion.div 
-                            className={`absolute top-0 left-[-200px] text-[250px] h-[90%] font-bold whitespace-nowrap text-movingText  z-1 theme-${theme}`}                    
-                                variants={sliderVariants}  initial="initial" animate="animate">
-                                    <span className="opacity-10">CONTACT</span> 
-                            </motion.div>
-                        </div>
+         <div className="absolute top-0 left-2  z-1 h-full w-full pointer-events-none overflow-hidden">
+            <motion.div 
+              className={`absolute top-0 left-[-200px] text-[250px] h-[90%] font-bold whitespace-nowrap text-movingText  z-1 theme-${theme}`}                    
+                variants={sliderVariants}  initial="initial" animate="animate">
+                <span className="opacity-10">CONTACT</span> 
+            </motion.div>
+          </div>
 
         </motion.div>
     </>

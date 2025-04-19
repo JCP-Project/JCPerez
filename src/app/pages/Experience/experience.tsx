@@ -1,6 +1,6 @@
 
-import React, { useContext, useEffect, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useContext, useEffect, useState } from "react";
+import { motion} from "framer-motion";
 import jobExp from '../../data/jobExpData';
 import themeContext from '../../components/Themes/themeContext';
 
@@ -147,7 +147,7 @@ const Experience = () => {
 };
 
 
-const sliderVariants = {
+const sliderVariants: any = {
     initial: {
       y: "-40%",
       rotate: -90,

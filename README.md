@@ -61,3 +61,20 @@ npm run build
 ```
 
 This will create an optimized build of your project in the dist directory.
+
+# dev
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "eslint src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "format": "prettier --write ."
+  },
+
+
+  # ghpages
+  "scripts": {
+  "build": "tsc && vite build",
+  "deploy": "gh-pages -d dist"
+}
+

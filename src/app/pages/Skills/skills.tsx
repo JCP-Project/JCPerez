@@ -106,20 +106,20 @@ function Skills() {
   );
 }
 
-const sliderVariants: any = {
-    initial: {
-      y: "-40%",
-      rotate: -90,
-    },
-    animate: {
-      y: "20%",
-      opacity: 1,
-      transition: {
-        repeat: Infinity,
-        repeatType: "mirror",
-        duration: 10,
+  const sliderVariants: any = {
+      initial: {
+        y: "-40%",
+        rotate: -90,
       },
-    },
-  };
+      animate: {
+        y: "20%",
+        opacity: 1,
+        transition: {
+          repeat: Infinity,
+          repeatType: "mirror",
+          duration: 10,
+        },
+      },
+    };
 
 export default Skills;
