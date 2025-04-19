@@ -4,6 +4,7 @@ import DevImg from './../../images/Programmer.svg'
 import TypingAnimation from "./typingAnimation";
 import themeContext from '../../components/Themes/themeContext';
 import { MdOutlineDownload } from "react-icons/md";
+import CV from '../../data/John Carlo M. Perez - CV.pdf';
 
 function Home() {
     const theme = useContext(themeContext);
@@ -47,7 +48,9 @@ function Home() {
                                 <span className={`inline-block theme-${theme}`}>Fullstack Developer</span>
                             </div> 
                             <div>
-                               <button className={`text-sm bg-primary
+                               <button 
+                            //    onClick={() => {window.open(CV, "_blank");}} 
+                               className={`text-sm bg-primary
                                                     my-3 py-3 px-8 flex justify-center items-center 
                                                     transition-transform transform hover:scale-110 hover:rotate-[-10deg]
                                                     hover:ease-out hover:duration-300
