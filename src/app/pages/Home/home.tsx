@@ -20,15 +20,14 @@ function Home() {
         };
 
         const handleResize = () => {
-            setIsMobile(window.innerWidth <= 768); // Check for mobile screen size
+            setIsMobile(window.innerWidth <= 768);
         };
 
         window.addEventListener("mousemove", handleMouseMove);
         window.addEventListener("resize", handleResize);
 
-        handleResize(); // Initial check
+        handleResize(); 
 
-        // Cleanup event listeners on unmount
         return () => {
             window.removeEventListener("mousemove", handleMouseMove);
             window.removeEventListener("resize", handleResize);
@@ -83,7 +82,7 @@ function Home() {
                         className={`absolute bottom-0 left-[200px] md:bottom-[-60px] md:left-[-10px] text-[150px] md:text-[200px] font-bold whitespace-nowrap text-movingText z-10 theme-${theme}`}                    
                         variants={sliderVariants}  
                         initial="initial" 
-                        animate={isMobile ? "mobile" : "animate"} // Switch based on screen size
+                        animate={isMobile ? "mobile" : "animate"}
                     >
                         <div className="opacity-20 rotate-90 md:rotate-0">FullStack Developer</div> 
                     </motion.div>
@@ -98,7 +97,7 @@ function Home() {
                             top: mousePosition.y - 20,
                         }}
                         animate={{
-                            scale: 1.5,  // Grow the cursor slightly when moving
+                            scale: 1.5,
                         }}
                         transition={{
                             type: "spring",
@@ -110,7 +109,6 @@ function Home() {
                         <div className="w-10 h-10 bg-red-500 rounded-full opacity-5"></div>
                     </motion.div>
 
-                    {/* Optional: Show a trailing circle effect */}
                     <motion.div
                         className="absolute rounded-full bg-blue-300 opacity-5"
                         style={{
@@ -136,12 +134,12 @@ function Home() {
     );
 }
 
-const sliderVariants = {
+const sliderVariants: any = {
     initial: {
-        x: "-50%", // Horizontal position for large screens
+        x: "-50%",
     },
     animate: {
-        x: "30%", // Horizontal position for large screens
+        x: "30%",
         opacity: 1,
         transition: {
             repeat: Infinity,
@@ -150,7 +148,7 @@ const sliderVariants = {
         },
     },
     mobile: {
-        y: ["30%","-200%"], // Vertical position for mobile screens
+        y: ["30%","-200%"],
         opacity: 1,
         transition: {
             repeat: Infinity,

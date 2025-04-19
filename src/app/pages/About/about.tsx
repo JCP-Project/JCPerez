@@ -44,7 +44,6 @@ function About () {
 
     window.addEventListener("mousemove", handleMouseMove);
 
-    // Cleanup the event listener when the component is unmounted
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
@@ -52,9 +51,9 @@ function About () {
 
     return(
         <>
-        <div className="absolute my-5 overflowx-hidden">
+        <div className="absolute my-5">
           <div className="flex items-center h-full justify-center md:px-[200px]">
-            <div className="mt-10">
+            <div className="mt-10 z-10">
               <motion.h2
                   className={`text-3xl font-semibold text-center mt-10 mb-2 md:mt-0 theme-${theme}`}
                   initial={{ y: -20, scale:1.5 }}
@@ -63,7 +62,7 @@ function About () {
                     type: 'spring',
                     stiffness: 300,
                     damping: 15,
-                    duration: 2,  // Total duration of the animation
+                    duration: 2,
                   }}
                 >
                   About
@@ -73,7 +72,7 @@ function About () {
                   initial={{ scaleX: 0 }}
                   animate={{ scaleX: 1 }}
                   transition={{ duration: 1, ease: 'easeInOut' }}
-                  style={{ originX: 0.5 }}  // This sets the animation to grow from the center
+                  style={{ originX: 0.5 }}
                 ></motion.div>
 
                 <div className=" flex flex-col md:flex-row items-center justify-center">
@@ -92,7 +91,7 @@ function About () {
                           />
                       </motion.div>
 
-                      <motion.div className="flex-1 text-sm md:text-md lg:text-lg font-semibold flex justify-center items-center h-full">
+                      <motion.div className={`flex-1 text-sm md:text-md lg:text-lg font-semibold flex justify-center items-center h-full theme-${theme}`}>
                           <div className="text-justify relative py-5 px-5">
                               I’m a Fullstack Developer with 6 years of experience working on various types of applications, mainly using .NET technologies. Over the years, I’ve been part of different companies and industries.
                               I’ve worked on a variety of projects, including production tools, internal systems, and support applications. I make sure to write clean, maintainable code and provide proper documentation to help teams and users understand and use the systems effectively. I also handle support tasks when needed and assist users with technical concerns related to the applications.
@@ -161,7 +160,7 @@ function About () {
 
             <div className="absolute top-0 left-2  z-1 h-full w-full pointer-events-none overflow-hidden">
                         <motion.div 
-                        className={`absolute top-0 left-[-200px] text-[300px] h-[90%] font-bold whitespace-nowrap text-movingText  z-1 theme-${theme}`}                    
+                        className={`absolute top-0 left-[-200px] text-[300px] h-[90%] font-bold whitespace-nowrap text-movingText  z-10 theme-${theme}`}                    
                             variants={sliderVariants}  initial="initial" animate="animate">
                                 <span className="opacity-10">ABOUT</span> 
                         </motion.div>
@@ -174,7 +173,7 @@ function About () {
 }
 
 
-const sliderVariants = {
+const sliderVariants: any = {
     initial: {
       y: "-40%",
       rotate: -90,

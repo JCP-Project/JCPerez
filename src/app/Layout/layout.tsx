@@ -16,7 +16,7 @@ let tabs = [
 const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
 
 const [theme, setTheme] = useState<string>(themes[0]);
-let [activeTab, setActiveTab] = useState(tabs[0].id);
+//let [activeTab, setActiveTab] = useState(tabs[0].id);
 
 const [isScaled, setIsScaled] = useState(false);
 const [switchTheme, setSwitchTheme] = useState<string>(themes[0]);
@@ -27,24 +27,22 @@ useEffect(() => {
 },[])
 
 const selectThemes = (theme: string) => {
-  setIsScaled(!isScaled);        // Start scale animation
-  setSwitchTheme(theme);         // Switch theme (maybe for styling/preview)
+  setIsScaled(!isScaled);
+  setSwitchTheme(theme);
 
-  // Delay applying theme logic
   setTimeout(() => {
-    setTheme(theme);             // Actual theme application after 3 seconds
+    setTheme(theme);
     localStorage.setItem("theme", theme);
-  }, 500); // 3 seconds
+  }, 500);
 
-  // Delay unscaling after 4 seconds
+
   setTimeout(() => {
     setIsScaled(false);
-  }, 800); // 4 seconds
+  }, 800);
 };
 
 
   const borderClass = (label: string) => {
-    // Direct handling of common colors
     if (label === 'dark') {
       return 'border-black';
     }
@@ -54,8 +52,7 @@ const selectThemes = (theme: string) => {
     if (label === 'purple') {
       return 'border-purple-500';
     }
-    // Handle arbitrary hex color values
-    return `border-[${label}]`; // For hex colors like #57B4BA, #7D0A0A, etc.
+    return `border-[${label}]`;
   };
 
   return (

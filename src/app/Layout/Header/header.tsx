@@ -6,10 +6,7 @@ import { motion } from "framer-motion";
 function Header() {
     const theme = useContext(themeContext);
 
-    // Active class with rotation and smooth transition
     const activeClassName = "text-gray-100 text-2xl rotate-[360deg] transition-transform duration-300";
-
-    // Page transition effect with framer-motion
     const linkVariants = {
         initial: { opacity: 0 },
         animate: { opacity: 1 },
@@ -17,8 +14,8 @@ function Header() {
     };
 
     const transition = {
-        duration: 0.5, // duration of the transition
-        ease: "easeInOut", // smooth easing function
+        duration: 0.5,
+        ease: "easeInOut",
     };
 
     return (

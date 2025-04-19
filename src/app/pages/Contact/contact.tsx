@@ -89,7 +89,7 @@ const Contact: React.FC = () => {
   return (
     <>
         <motion.div
-        className="flex flex-col md:flex-row items-center justify-center min-h-full my-5"
+        className="relative z-20 flex flex-col md:flex-row items-center justify-center min-h-full my-5"
         ref={ref}
         variants={variants}
         initial="initial"
@@ -132,43 +132,43 @@ const Contact: React.FC = () => {
             >
             <svg width="300px" height="300px" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <motion.path
-                strokeWidth={0.2}
+                strokeWidth={4}
                 fill="none"
                 initial={{ pathLength: 0 }}
                 animate={isInview && { pathLength: 1 }}
                 transition={{ delay: 0, duration: 1 }}
                 d="M44 24V9H24H4V24V39H24"
-                stroke="#DBDBDB" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"
+                stroke="#DBDBDB"  strokeLinecap="round" strokeLinejoin="round"
                 />
 
                 <motion.path
-                strokeWidth={0.2}
+                strokeWidth={4}
                 fill="none"
                 initial={{ pathLength: 0, opacity: 0 }}
                 animate={isInview && { pathLength: 1, opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.4 }}
                 d="M4 9L24 24L44 9"
-                stroke="#DBDBDB" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"
+                stroke="#DBDBDB"  strokeLinecap="round" strokeLinejoin="round"
                 />
 
                 <motion.path
-                strokeWidth={0.2}
+                strokeWidth={4}
                 fill="none"
                 initial={{ pathLength: 0 }}
                 animate={isInview && { pathLength: 1 }}
                 transition={{ delay: 0, duration: 1 }}
                 d="M39 29L44 34L39 39"
-                stroke="#DBDBDB" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"
+                stroke="#DBDBDB"  strokeLinecap="round" strokeLinejoin="round"
                 />
 
                 <motion.path
-                strokeWidth={0.2}
+                strokeWidth={4}
                 fill="none"
                 initial={{ pathLength: 0 }}
                 animate={isInview && { pathLength: 1 }}
                 transition={{ delay: 0, duration: 1 }}
                 d="M30 34L44 34"
-                stroke="#DBDBDB" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"
+                stroke="#DBDBDB"  strokeLinecap="round" strokeLinejoin="round"
                 />
             </svg>
             </motion.div>
@@ -241,7 +241,7 @@ const Contact: React.FC = () => {
 };
 
 
-const sliderVariants = {
+const sliderVariants: any = {
     initial: {
       y: "-40%",
       rotate: -90,

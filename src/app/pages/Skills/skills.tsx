@@ -25,7 +25,7 @@ function Skills() {
     <>
       <div className="my-5">
         <div className="flex items-center h-full justify-center md:px-[200px]">
-          <div className="mt-10">
+          <div className="mt-10 z-10">
             {/* Title Section */}
             <motion.h2
               className={`text-3xl font-semibold text-center mt-10 mb-2 mb-2 theme-${theme}`}
@@ -95,7 +95,7 @@ function Skills() {
 
                   <div className="absolute top-0 left-2  z-1 h-full w-full pointer-events-none overflow-hidden">
                       <motion.div 
-                      className={`absolute top-0 left-[-200px] text-[300px] h-[90%] font-bold whitespace-nowrap text-movingText  z-1 theme-${theme}`}                    
+                      className={`absolute top-0 left-[-200px] text-[300px] h-[90%] font-bold whitespace-nowrap text-movingText  z-10 theme-${theme}`}                    
                           variants={sliderVariants}  initial="initial" animate="animate">
                               <span className="opacity-10">SKILLS</span> 
                       </motion.div>
@@ -106,7 +106,7 @@ function Skills() {
   );
 }
 
-const sliderVariants = {
+const sliderVariants: any = {
     initial: {
       y: "-40%",
       rotate: -90,

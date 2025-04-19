@@ -15,7 +15,7 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({ messages }) => {
 
   useEffect(() => {
     const message = messages[currentIndex];
-    let index = 0;
+    //let index = 0;
     let interval: ReturnType<typeof setInterval>;
 
     const type = () => {
