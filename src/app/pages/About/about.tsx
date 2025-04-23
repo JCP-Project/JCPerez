@@ -4,6 +4,7 @@ import profileGIF from '../../images/profileEmoji.gif'
 import profilePNG from '../../images/profile.png'
 import themeContext from '../../components/Themes/themeContext';
 import jobExp from '../../data/jobExpData';
+import PageHeader from "../../components/pageHeader";
 
 import SERDAL from '../../data/logo.png'
 import UPLB from '../../data/UPLB_VIGHRColor_1.png'
@@ -40,26 +41,7 @@ function About () {
         <div className="absolute my-5">
           <div className="flex items-center h-full justify-center md:px-[200px]">
             <div className="mt-10 z-10">
-              <motion.h2
-                  className={`text-3xl font-semibold text-center mt-10 mb-2 md:mt-0 theme-${theme}`}
-                  initial={{ y: -20, scale:1.5 }}
-                  animate={{ y: 0, scale: 1 }}   
-                  transition={{
-                    type: 'spring',
-                    stiffness: 300,
-                    damping: 15,
-                    duration: 2,
-                  }}
-                >
-                  About
-                </motion.h2>
-                <motion.div
-                  className="border-b-2 border-gray-300 mb-8"
-                  initial={{ scaleX: 0 }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 1, ease: 'easeInOut' }}
-                  style={{ originX: 0.5 }}
-                ></motion.div>
+            <PageHeader title="About" />
 
                 <div className=" flex flex-col md:flex-row items-center justify-center">
                       <motion.div className="flex-1 flex text-center items-center justify-center">

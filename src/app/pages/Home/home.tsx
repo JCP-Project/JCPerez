@@ -1,45 +1,52 @@
 import { useContext, useEffect, useState } from "react";
 import { motion } from 'framer-motion';
+
+import DevImgDark from './../../images/Programmer-Dark.svg'
 import DevImg from './../../images/Programmer.svg'
+import DevImg2 from './../../images/Programmer2.svg'
+import DevImg3 from './../../images/Programmer3.svg'
+
 import TypingAnimation from "./typingAnimation";
 import themeContext from '../../components/Themes/themeContext';
 import { MdOutlineDownload } from "react-icons/md";
-import CV from '../../data/John Carlo M. Perez - CV.pdf';
+//import CV from '../../data/John Carlo M. Perez - CV.pdf';
 
 function Home() {
     const theme = useContext(themeContext);
     const [isMobile, setIsMobile] = useState(false);
-
-    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const [img, setIMG] = useState(DevImg);
 
     useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            setMousePosition({
-                x: e.clientX,
-                y: e.clientY,
-            });
-        };
-
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
         };
-
-        window.addEventListener("mousemove", handleMouseMove);
-        window.addEventListener("resize", handleResize);
-
         handleResize(); 
-
-        return () => {
-            window.removeEventListener("mousemove", handleMouseMove);
-            window.removeEventListener("resize", handleResize);
-        };
     }, []);
+
+    const selectedTheme = localStorage.getItem("theme");
+
+    useEffect(() =>{
+        if (selectedTheme == "1") {
+          return setIMG(DevImgDark);
+        }
+
+        if (selectedTheme == "2") {
+          return setIMG(DevImg2);
+        }
+
+        if (selectedTheme == "3") {
+          return setIMG(DevImg3);
+        }
+
+        return setIMG(DevImg);
+    },[selectedTheme])
+
 
     return (
         <>
             <div className="relative h-full flex md:items-center md:justify-center flex-col md:flex-row overflow-hidden">
                 <div className="flex-1 h-full pl-5 md:pl-5 lg:pl-20  order-2 md:order-1 z-10">
-                    <div className="flex md:items-center md:justify-start md:justify-center h-full text-xl md:text-3xl font-semibold">
+                    <div className="flex md:items-center md:justify-start h-full text-xl md:text-3xl font-semibold">
                         <div className="md:w-[80%]">
                             <div className="pointer-events-none">
                                 <TypingAnimation messages={["HI, I AM CARLO", "WELCOME TO MY PORTFOLIO"]} />
@@ -48,22 +55,28 @@ function Home() {
                                 <span className={`inline-block theme-${theme}`}>Fullstack Developer</span>
                             </div> 
                             <div>
-                               <button 
-                            //    onClick={() => {window.open(CV, "_blank");}} 
-                               className={`text-sm bg-primary
-                                                    my-3 py-3 px-8 flex justify-center items-center 
-                                                    transition-transform transform hover:scale-110 hover:rotate-[-10deg]
-                                                    hover:ease-out hover:duration-300
-                                                     theme-${theme}`}>
-                                <span className="text-tBase">Download CV</span> <span><MdOutlineDownload className="ml-3 text-tBase" size={20}/></span> 
-                                </button>
+                                <motion.button className={`bg-primary text-white text-sm font-bold flex px-8 py-3 mt-5 rounded-sm theme-${theme}`}
+                                // onClick={() => {window.open(CV, "_blank");}} 
+                                    initial={{ scaleX: 1 }}
+                                    whileHover={{
+                                    scaleX: 1.2, // Stretch the text horizontally like a "string"
+                                    }}
+                                    transition={{
+                                    type: "spring", 
+                                    stiffness: 500, 
+                                    damping: 10,
+                                    duration: 0.3
+                                    }}
+                                >
+                                    <span className="text-white">Download CV</span> <MdOutlineDownload className="ml-3 text-tBase" size={20} />
+                                </motion.button>
                             </div>             
                         </div>
                     </div>
                 </div>
                 <div className="flex-1 flex justify-center items-center order-1 md:order-2 z-10">
                     <motion.img
-                        src={DevImg}
+                        src={img}
                         alt="Programmer"
                         className="object-cover w-full h-full"
                         initial={{ x: '100%' }}
@@ -82,7 +95,7 @@ function Home() {
 
                 <div className="z-1 pointer-events-none ">
                     <motion.div 
-                        className={`absolute bottom-0 left-[200px] md:bottom-[-60px] md:left-[-10px] text-[150px] md:text-[200px] font-bold whitespace-nowrap text-movingText z-10 theme-${theme}`}                    
+                        className={`absolute bottom-0 left-[270px] md:bottom-[-60px] md:left-[-10px] text-[250px] md:text-[200px] font-bold whitespace-nowrap text-movingText z-10 theme-${theme}`}                    
                         variants={sliderVariants}  
                         initial="initial" 
                         animate={isMobile ? "mobile" : "animate"}
@@ -91,47 +104,7 @@ function Home() {
                     </motion.div>
                 </div>
 
-                <div className="absolute w-full h-screen hidden md:block opacity-10">
-                    {/* Custom mouse pointer */}
-                    <motion.div
-                        className="absolute rounded-full bg-blue-700"
-                        style={{
-                            left: mousePosition.x - 80,
-                            top: mousePosition.y - 20,
-                        }}
-                        animate={{
-                            scale: 1.5,
-                        }}
-                        transition={{
-                            type: "spring",
-                            stiffness: 400,
-                            damping: 20,
-                        }}
-                        initial={{ opacity: 0.7 }}
-                    >
-                        <div className="w-10 h-10 bg-red-500 rounded-full opacity-5"></div>
-                    </motion.div>
-
-                    <motion.div
-                        className="absolute rounded-full bg-blue-300 opacity-5"
-                        style={{
-                            left: mousePosition.x - 50,
-                            top: mousePosition.y - 50,
-                        }}
-                        animate={{
-                            scale: 2,
-                            opacity: 0,
-                        }}
-                        transition={{
-                            type: "spring",
-                            stiffness: 300,
-                            damping: 15,
-                            duration: 1, 
-                        }}
-                    >
-                        <div className="w-20 h-20 bg-blue-300 rounded-full opacity"></div>
-                    </motion.div>
-                </div>
+ 
             </div>
         </>
     );
@@ -147,7 +120,7 @@ const sliderVariants: any = {
         transition: {
             repeat: Infinity,
             repeatType: "mirror",
-            duration: 8,
+            duration: 10,
         },
     },
     mobile: {
@@ -156,7 +129,7 @@ const sliderVariants: any = {
         transition: {
             repeat: Infinity,
             repeatType: "mirror",
-            duration: 5,
+            duration: 7,
         },
     },
 };

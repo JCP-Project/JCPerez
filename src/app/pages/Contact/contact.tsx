@@ -125,7 +125,7 @@ const Contact: React.FC = () => {
           <motion.div className="emailSvg absolute pointer-events-none z-0 flex items-center justify-center"
             initial={{ opacity: 1 }}
             whileInView={{ opacity: 0 }}
-            transition={{delay: 1, duration: 3 }}
+            transition={{delay: 1, duration: 2 }}
             
             >
             <svg width="300px" height="300px" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -178,7 +178,7 @@ const Contact: React.FC = () => {
             onSubmit={sendEmail}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ delay: 3, duration: 2 }}
+            transition={{ delay: 1, duration: 1 }}
             >
                 <label htmlFor="name" className="block text-lg font-medium">
                 Name

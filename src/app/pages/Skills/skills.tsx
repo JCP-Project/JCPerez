@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import techList from '../../data/skills';
 import { motion } from 'framer-motion';
 import themeContext from '../../components/Themes/themeContext';
+import PageHeader from "../../components/pageHeader";
 
 interface techStack {
   id: number;
@@ -26,28 +27,8 @@ function Skills() {
       <div className="my-5">
         <div className="flex items-center h-full justify-center md:px-[200px]">
           <div className="mt-10 z-10">
-            {/* Title Section */}
-            <motion.h2
-              className={`text-3xl font-semibold text-center mt-10 mb-2 mb-2 theme-${theme}`}
-              initial={{ y: -20, scale:1.5 }}
-              animate={{ y: 0, scale: 1 }}   
-              transition={{
-                type: 'spring',
-                stiffness: 300,
-                damping: 15,
-                duration: 2,  // Total duration of the animation
-              }}
-            >
-              Technologies I Work With
-            </motion.h2>
 
-            <motion.div
-              className="border-b-2 border-gray-300 mb-8"
-              initial={{ scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={{ duration: 1, ease: 'easeInOut' }}
-              style={{ originX: 0.5 }}  // This sets the animation to grow from the center
-            ></motion.div>
+            <PageHeader title="Technologies I Work With" />
             
             {/* Skills Section */}
             <div className="flex flex-wrap">

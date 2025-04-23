@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { motion} from "framer-motion";
 import jobExp from '../../data/jobExpData';
 import themeContext from '../../components/Themes/themeContext';
-
+import PageHeader from "../../components/pageHeader";
 
 interface CompanyClient {
     name: string;
@@ -34,28 +34,8 @@ const Experience = () => {
     <>
     <div className="relative z-20 w-full ">
         <div className="max-w-full md-max-full lg:max-w-4xl mx-auto py-10 z-10">
-           
-        <motion.h2
-            className={`text-3xl font-semibold text-center mt-10 mb-2 md:mt-10 mb-2 theme-${theme}`}
-            initial={{ y: -20, scale:1.5 }}
-            animate={{ y: 0, scale: 1 }}   
-            transition={{
-              type: 'spring',
-              stiffness: 300,
-              damping: 15,
-              duration: 2,
-            }}
-          >
-           Companies I Have Worked With
-          </motion.h2>
+           <PageHeader title="Companies I Have Worked With" />
 
-          <motion.div
-            className="border-b-2 border-gray-300 mb-8"
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 1, ease: 'easeInOut' }}
-            style={{ originX: 0.5 }}
-          ></motion.div>
         <div className="relative z-20">
 
             <div className="absolute inset-0 flex items-center justify-left md:justify-center">

@@ -1,62 +1,72 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect, useRef, useState } from 'react';
 import Header from './Header/header';
 import themeContext from '../components/Themes/themeContext';
 import { motion } from 'framer-motion';
 
-const themes = ['black','orange','purple'];
-
 let tabs = [
-  { id: "light", label: "#FDFBEE" },
-  { id: "dark", label: "#57B4BA" },
-  { id: "orange", label: "#7D0A0A" },
-  { id: "purple", label: "#FF2DF1" },
+  { id: 0, label: "#17C0CC" },
+  { id: 1, label: "#090731" },
+  { id: 2, label: "#4B70F5" },
+  { id: 3, label: "#4B70F5" },
 ];
-
 
 const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
 
-const [theme, setTheme] = useState<string>(themes[0]);
-//let [activeTab, setActiveTab] = useState(tabs[0].id);
-
+const [theme, setTheme] = useState<any>(0);
 const [isScaled, setIsScaled] = useState(false);
-const [switchTheme, setSwitchTheme] = useState<string>(themes[0]);
+const [switchTheme, setSwitchTheme] = useState<number>(0);
+
+const ref = useRef<HTMLDivElement | null>(null);
+const [coordinates, setCoordinates] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+
 
 useEffect(() => {
   const localtheme = localStorage.getItem("theme") ?? "dark";
   setTheme(localtheme);
+
+      const element = ref.current;
+    if (element) {
+      const handlePointerMove = (event: PointerEvent) => {
+        const { clientX, clientY } = event;
+        const x = clientX - element.offsetLeft - element.offsetWidth / 2;
+        const y = clientY - element.offsetTop - element.offsetHeight / 2;
+        setCoordinates({ x, y });
+      };
+
+      window.addEventListener("pointermove", handlePointerMove);
+      return () => window.removeEventListener("pointermove", handlePointerMove);
+    }
 },[])
 
-const selectThemes = (theme: string) => {
+const selectThemes = (theme: number) => {
   setIsScaled(!isScaled);
   setSwitchTheme(theme);
 
+  console.log(theme);
+
   setTimeout(() => {
     setTheme(theme);
-    localStorage.setItem("theme", theme);
+    localStorage.setItem("theme", theme.toString());
   }, 500);
-
 
   setTimeout(() => {
     setIsScaled(false);
   }, 800);
 };
 
-
-  const borderClass = (label: string) => {
-    if (label === 'dark') {
-      return 'border-black';
-    }
-    if (label === 'orange') {
-      return 'border-orange-500';
-    }
-    if (label === 'purple') {
-      return 'border-purple-500';
-    }
-    return `border-[${label}]`;
-  };
-
   return (
     <>
+
+    <motion.div
+      ref={ref}
+      className="hidden md:absolute circle h-20 w-20 bg-primary opacity-10 rounded-full z-40"
+      animate={{ x: coordinates.x, y: coordinates.y + 5}}
+      transition={{
+          type: "spring",
+      }}
+     >      
+     </motion.div>
+
     <div className="flex overflow-hidden">
 
       {isScaled ? (
@@ -84,10 +94,10 @@ const selectThemes = (theme: string) => {
                       <motion.span
                         layoutId="bubble"
                         className={`absolute inset-0 z-10 bg-secondary mix-blend-difference rounded-full theme-${theme}`}                     
-                        transition={{ type: "spring", bounce: .9, duration: .8 }}
+                        transition={{ type: "spring", bounce: .2, duration: .8 }}
                       />
                     )}
-                    <div className={`h-5 w-5 rounded-full border-2 ${borderClass(tab.id)}`}></div>
+                    <div className={`h-5 w-5 rounded-full border-2 ${tab.id == 1 ? "border-[#090731]" : tab.id == 2 ? "border-[#4B70F5]" : tab.id == 3 ? "border-[#B82132]":"border-[#17C0CC]"  } `}></div>
                   </button>
                 ))}
               </div>
@@ -96,9 +106,10 @@ const selectThemes = (theme: string) => {
 
 
 
-            <div className={`h-screen bg-primary text-tBase theme-${theme} z-50`}><Header/></div>
-            <div className={`relative h-screen w-[100%] overflow-y-auto bg-bgPrimary overflow-x-hidden md:px-5 theme-${theme}`}>
-                <themeContext.Provider value={theme}>
+            <div className={`fixed bottom-0 left-0 md:relative md:flex md:h-screen bg-primary text-tBase theme-${theme} z-50`}><Header/></div>
+
+            <div className={`relative h-screen w-[100%] overflow-y-auto bg-bgPrimary overflow-x-hidden theme-${theme}`}>
+                <themeContext.Provider value={theme.toString()}>
                   {children}
                 </themeContext.Provider>
             </div>
