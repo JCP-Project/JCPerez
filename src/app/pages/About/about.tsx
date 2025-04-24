@@ -45,7 +45,7 @@ function About () {
 
                 <div className=" flex flex-col md:flex-row items-center justify-center">
                       <motion.div className="flex-1 flex text-center items-center justify-center">
-                          <motion.img src={isHovered ? profileGIF : profilePNG} className="rounded-lg h-[300px]"
+                          <motion.img src={isHovered ? profileGIF : profilePNG} className="rounded-lg max-h-[300px] object-contain"
                                       onMouseEnter={() => setIsHovered(true)}
                                       onMouseLeave={() => setIsHovered(false)}
                                       whileHover={{
@@ -91,7 +91,7 @@ function About () {
                           damping: 10
                         }
                       }}             
-                    src={UPLB} alt="UPLB"  className="rounded-sm h-20 bg-white px-2"/>
+                    src={UPLB} alt="UPLB"  className="rounded-sm max-h-20 bg-white px-2 object-contain"/>
                   </motion.div>
 
                   <motion.div className="shadow-lg">
@@ -110,12 +110,12 @@ function About () {
                           damping: 10
                         }
                       }}             
-                    src={SERDAL} alt="SERDAL" className="rounded-lg h-20"/>
+                    src={SERDAL} alt="SERDAL" className="rounded-lg max-h-20 object-contain"/>
                   </motion.div>  
 
                 {
                   JExp.filter((_, index) => [0,1,2].includes(index)).map((exp) => (
-                  <motion.div key={`k${exp.id}`} id={`id${exp.id}`} className="shadow-lg">
+                  <motion.div key={`k${exp.id}`} id={`id${exp.id}`} className="shadow-lg object-contain">
                       <motion.img 
                           initial={{ scale: 0 }}
                           animate={{ scale: 1 }}
@@ -131,7 +131,7 @@ function About () {
                               damping: 10
                             }
                           }}             
-                        src={exp?.client[0].logo} alt={exp?.client[0].alt} className="rounded-lg h-20"/>
+                        src={exp?.client[0].logo} alt={exp?.client[0].alt} className="rounded-lg max-h-20 object-contain"/>
                   </motion.div>                  
                   ))
                 }

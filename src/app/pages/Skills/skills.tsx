@@ -48,10 +48,10 @@ function Skills() {
                     </motion.div>
                     </div>
                     <div className="w-full ml-5">
-                      <div>{techdata.alt}</div>
-                      <div className="w-full bg-gray-200 rounded-full h-4">
+                      <div className='font-bold'>{techdata.alt}</div>
+                      <div className="w-full bg-gray-200 rounded-full h-4  border-[1px]">
                         <motion.div
-                          className="bg-blue-600 text-xs text-white font-medium h-full text-center leading-none rounded-full"
+                          className="bg-primary text-xs text-white font-medium h-full text-center leading-none rounded-full"
                           initial={{ width: '0%' }}
                           animate={{ width: `${(techdata.exp / totalExperience) * 100}%` }}
                           transition={{ duration: 2, ease: 'easeInOut' }}

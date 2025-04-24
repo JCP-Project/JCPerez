@@ -57,18 +57,17 @@ const TypingAnimation: React.FC<TypingAnimationProps> = ({ messages }) => {
   }, []);
 
   return (
-    <div style={{ display: 'inline-block' }}>
-      <motion.span
-        style={{ fontFamily: "Arial, sans-serif" }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-        className={` theme-${theme}`}
-      >
+    <>
+      <motion.span animate={{ opacity: 1 }} transition={{ duration: 0.5 }} 
+      style={{
+        WebkitTextStroke: '.5px black',
+        fontWeight: 'bold',
+      }}
+      className={`theme-${theme}`} >
         {typedText}
       </motion.span>
-      {/* Optionally show cursor */}
       {cursorVisible && <span>|</span>}
-    </div>
+    </>
   );
 };
 

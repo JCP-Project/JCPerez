@@ -3,18 +3,20 @@ import Header from './Header/header';
 import themeContext from '../components/Themes/themeContext';
 import { motion } from 'framer-motion';
 
+const themes = ['light','black','orange','purple'];
+
 let tabs = [
-  { id: 0, label: "#17C0CC" },
-  { id: 1, label: "#090731" },
-  { id: 2, label: "#4B70F5" },
-  { id: 3, label: "#4B70F5" },
+  { id: "0", label: "#17C0CC" },
+  { id: "1", label: "#090731" },
+  { id: "2", label: "#4B70F5" },
+  { id: "3", label: "#B82132" },
 ];
 
 const Layout: React.FC<{ children: ReactNode }> = ({ children }) => {
 
-const [theme, setTheme] = useState<any>(0);
+const [theme, setTheme] = useState<string>(themes[0]);
 const [isScaled, setIsScaled] = useState(false);
-const [switchTheme, setSwitchTheme] = useState<number>(0);
+const [switchTheme, setSwitchTheme] = useState<string>(themes[0]);
 
 const ref = useRef<HTMLDivElement | null>(null);
 const [coordinates, setCoordinates] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -38,7 +40,7 @@ useEffect(() => {
     }
 },[])
 
-const selectThemes = (theme: number) => {
+const selectThemes = (theme: string) => {
   setIsScaled(!isScaled);
   setSwitchTheme(theme);
 
@@ -46,13 +48,26 @@ const selectThemes = (theme: number) => {
 
   setTimeout(() => {
     setTheme(theme);
-    localStorage.setItem("theme", theme.toString());
+    localStorage.setItem("theme", theme);
   }, 500);
 
   setTimeout(() => {
     setIsScaled(false);
   }, 800);
 };
+
+  const borderClass = (label: string) => {
+    if (label === '1') {
+      return 'border-[#090731]';
+    }
+    if (label === '2') {
+      return 'border-[#4B70F5]';
+    }
+    if (label === '3') {
+      return 'border-[#B82132]';
+    }
+    return `border-[#17C0CC]`;
+  };
 
   return (
     <>
@@ -97,7 +112,7 @@ const selectThemes = (theme: number) => {
                         transition={{ type: "spring", bounce: .2, duration: .8 }}
                       />
                     )}
-                    <div className={`h-5 w-5 rounded-full border-2 ${tab.id == 1 ? "border-[#090731]" : tab.id == 2 ? "border-[#4B70F5]" : tab.id == 3 ? "border-[#B82132]":"border-[#17C0CC]"  } `}></div>
+                    <div className={`h-5 w-5 rounded-full border-2 ${borderClass(tab.id)}`}></div>
                   </button>
                 ))}
               </div>
@@ -109,7 +124,7 @@ const selectThemes = (theme: number) => {
             <div className={`fixed bottom-0 left-0 md:relative md:flex md:h-screen bg-primary text-tBase theme-${theme} z-50`}><Header/></div>
 
             <div className={`relative h-screen w-[100%] overflow-y-auto bg-bgPrimary overflow-x-hidden theme-${theme}`}>
-                <themeContext.Provider value={theme.toString()}>
+                <themeContext.Provider value={theme}>
                   {children}
                 </themeContext.Provider>
             </div>

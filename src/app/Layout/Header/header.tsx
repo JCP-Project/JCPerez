@@ -13,7 +13,7 @@ function Header() {
     const theme = useContext(themeContext);
     const location = useLocation();
     
-    const activeClassName = "text-gray-100 text-2xl rotate-[360deg] md:rotate-[13deg] mb-10 md:mb-0  transition-transform duration-500 ease-in-out bg-primary p-4 rounded-full md:rounded-md";
+    const activeClassName = "text-gray-100 text-2xl rotate-[360deg] md:rotate-[13deg] mb-10 md:mb-0  transition-transform duration-500 ease-in-out bg-primary p-4 rounded-full md:rounded-md focus:outline-none focus:ring-0 active:outline-none active:ring-0";
     const linkVariants = {
         initial: { opacity: 0 },
         animate: { opacity: 1 },
@@ -28,7 +28,7 @@ function Header() {
     return (
         <>
         <div className="hidden md:block">
-            <div className={`hidden rotate-[-90deg] h-full md:flex items-center justify-center w-10 font-bold z-50 `}>
+            <div className={`hidden rotate-[-90deg] h-full md:flex items-center justify-center w-10 font-bold z-[9999]`}>
                 <motion.div
                     className={`relative flex items-center justify-center space-x-10 text-tBase theme-${theme} overflow-visible`}
                     variants={linkVariants}
@@ -41,7 +41,7 @@ function Header() {
                         <NavLink 
                             to="/contact" 
                             title="Contact" 
-                            className={({ isActive }) => (isActive ? `${activeClassName} block rounded-full` : "block rounded-full")}
+                            className={({ isActive }) => (isActive ? `${activeClassName} block` : "block")}
                         >
                             Contact
                         </NavLink>
@@ -50,7 +50,7 @@ function Header() {
                         <NavLink 
                             to="/experience" 
                             title="Work Experience" 
-                            className={({ isActive }) => (isActive ? `${activeClassName} block rounded-full` : "rounded-full block")}
+                            className={({ isActive }) => (isActive ? `${activeClassName} block` : "block")}
                         >
                             Experience
                         </NavLink>
@@ -59,7 +59,7 @@ function Header() {
                         <NavLink 
                             to="/about" 
                             title="About" 
-                            className={({ isActive }) => (isActive ? `${activeClassName} block rounded-full` : "rounded-full block")}
+                            className={({ isActive }) => (isActive ? `${activeClassName} block` : "block")}
                         >
                             About
                         </NavLink>
@@ -68,7 +68,7 @@ function Header() {
                         <NavLink 
                             to="/skills" 
                             title="Skills" 
-                            className={({ isActive }) => (isActive ? `${activeClassName} block rounded-full` : "rounded-full block")}
+                            className={({ isActive }) => (isActive ? `${activeClassName} block` : "block")}
                         >
                             Skills
                         </NavLink>
@@ -77,7 +77,7 @@ function Header() {
                         <NavLink 
                             to="/" 
                             title="Home" 
-                            className={({ isActive }) => (isActive ? `${activeClassName} block rounded-full` : "rounded-full block")}
+                            className={({ isActive }) => (isActive ? `${activeClassName} block` : "block")}
                         >
                             Home
                         </NavLink>
@@ -87,9 +87,9 @@ function Header() {
         </div>
 
         <div className="w-screen md:hidden">
-            <div className={`md:hidden flex items-center justify-center h-10 w-full text-3xl font-bold z-50 `}>
+            <div className={`md:hidden flex items-center justify-center h-10 w-full text-3xl font-bold z-[9999] theme-${theme}`}>
                 <motion.div
-                    className={`relative flex items-center justify-center space-x-10 text-tBase theme-${theme} overflow-visible`}
+                    className={`relative flex items-center justify-center space-x-10 text-tBase theme-${theme} overflow-hidden`}
                     variants={linkVariants}
                     initial="initial"
                     animate="animate"
@@ -101,47 +101,60 @@ function Header() {
                     <NavLink 
                         to="/skills" 
                         title="Skills" 
-                        className={({ isActive }) => (isActive ? `${activeClassName} block` : "block")}
+                        className={({ isActive }) =>
+                        `${isActive ? activeClassName : ""} block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary`
+                        }
                     >
                         <FaComputer />
                     </NavLink>
-                </div>
-                <div className="">
+                    </div>
+
+                    <div>
                     <NavLink 
                         to="/about" 
                         title="About" 
-                        className={({ isActive }) => (isActive ? `${activeClassName} block` : "block")}
+                        className={({ isActive }) =>
+                        `${isActive ? activeClassName : ""} block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary`
+                        }
                     >
                         <MdPermContactCalendar />
                     </NavLink>
-                </div>
-                <div>
+                    </div>
+
+                    <div>
                     <NavLink 
                         to="/" 
                         title="Home" 
-                        className={`block ${location.pathname === "/" ? activeClassName : ""}`}
+                        className={`block ${location.pathname === "/" ? `${activeClassName} ` : ""} focus:outline-none focus-visible:ring-2 focus-visible:ring-primary`}
                     >
                         <ImHome />
                     </NavLink>
-                </div>
-                <div>
+                    </div>
+
+                    <div>
                     <NavLink 
                         to="/experience" 
                         title="Work Experience" 
-                        className={({ isActive }) => (isActive ? `${activeClassName} block` : "block")}
+                        className={({ isActive }) =>
+                        `${isActive ? activeClassName : ""} block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary`
+                        }
                     >
                         <FaBuilding />
                     </NavLink>
-                </div>
-                <div>
+                    </div>
+
+                    <div>
                     <NavLink 
                         to="/contact" 
                         title="Contact" 
-                        className={({ isActive }) => (isActive ? `${activeClassName} block` : "block")}
+                        className={({ isActive }) =>
+                        `${isActive ? activeClassName : ""} block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary`
+                        }
                     >
                         <MdEmail />
                     </NavLink>
-                </div>
+                    </div>
+
 
                 </motion.div>
             </div>
