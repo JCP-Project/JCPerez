@@ -9,7 +9,7 @@ import DevImg3 from './../../images/Programmer3.svg'
 import TypingAnimation from "./typingAnimation";
 import themeContext from '../../components/Themes/themeContext';
 import { MdOutlineDownload } from "react-icons/md";
-import CV from '../../data/John Carlo M. Perez - CV.pdf';
+import CV from '../../data/John Carlo M. Perez - CV 2025.pdf';
 
 function Home() {
     const theme = useContext(themeContext);

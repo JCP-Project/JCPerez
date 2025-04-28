@@ -3,6 +3,7 @@ import Angular from '../images/stackLogo/angular-original.svg';
 import Arduino from '../images/stackLogo/arduino-original-wordmark.svg';
 //import AzureDevOps from '../images/stackLogo/azuredevops-original.svg';
 import Bootstrap from '../images/stackLogo/bootstrap-original-wordmark.svg';
+import Tailwind from '../images/stackLogo/tailwind-svgrepo-com.svg';
 import Cplusplus from '../images/stackLogo/cplusplus-original.svg';
 import Css from '../images/stackLogo/css3-original.svg';
 import DotNet from '../images/stackLogo/dot-net-original-wordmark.svg';
@@ -17,7 +18,7 @@ import VB from '../images/stackLogo/visualbasic-original.svg';
 //import VS from '../images/stackLogo/visualstudio-original.svg';
 //import VSCode from '../images/stackLogo/vscode-original.svg';
 import Xamarin from '../images/stackLogo/xamarin-original.svg';
-import xml from '../images/stackLogo/xml-original.svg';
+//import xml from '../images/stackLogo/xml-original.svg';
 import MSSql from '../images/stackLogo/microsoftsqlserver-original-wordmark.svg';
 
 const techStack = [
@@ -33,7 +34,7 @@ const techStack = [
 		logo:'VB',
 		alt: 'VB.Net',
 		path: VB,
-		exp: 3,
+		exp: 4,
 	},
 	{
 		id: 3,
@@ -61,7 +62,7 @@ const techStack = [
 		logo:'DotNetCore',
 		alt:'.Net Core',
 		path: DotNetCore,
-		exp: 3,
+		exp: 5,
 	},
 	{
 		id: 7,
@@ -75,7 +76,7 @@ const techStack = [
 		logo:'React', 
 		alt: 'React',
 		path: React,
-		exp: 2,
+		exp: 3,
 	},
 	{
 		id: 9,
@@ -107,16 +108,16 @@ const techStack = [
 	},
 	{
 		id: 13,
-		logo:'Json',
-		alt:'Json',
-		path: Json,
-		exp: 5,
+		logo:'Tailwind',
+		alt:'Tailwind', 
+		path: Tailwind,
+		exp: 4,
 	},
 	{
 		id: 14,
-		logo:'XML',
-		alt:'XML', 
-		path: xml,
+		logo:'Json',
+		alt:'Json',
+		path: Json,
 		exp: 5,
 	},
 	{
@@ -124,7 +125,7 @@ const techStack = [
 		logo:'MySql',
 		alt:'MySQL', 
 		path: MySql,
-		exp: 4,
+		exp: 6,
 	},
 	{
 		id: 16,
