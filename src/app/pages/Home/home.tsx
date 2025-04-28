@@ -9,7 +9,7 @@ import DevImg3 from './../../images/Programmer3.svg'
 import TypingAnimation from "./typingAnimation";
 import themeContext from '../../components/Themes/themeContext';
 import { MdOutlineDownload } from "react-icons/md";
-//import CV from '../../data/John Carlo M. Perez - CV.pdf';
+import CV from '../../data/John Carlo M. Perez - CV.pdf';
 
 function Home() {
     const theme = useContext(themeContext);
@@ -62,7 +62,7 @@ function Home() {
                                 </div> 
                                 <div>
                                     <motion.button className={`bg-primary text-white text-sm font-bold flex px-8 py-3 mt-5 rounded-sm theme-${theme}`}
-                                    // onClick={() => {window.open(CV, "_blank");}} 
+                                    onClick={() => {window.open(CV, "_blank");}} 
                                         initial={{ scaleX: 1 }}
                                         whileHover={{
                                         scaleX: 1.2, 
